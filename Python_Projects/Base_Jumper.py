@@ -1,5 +1,6 @@
-
 DIGITS = "0123456789ABCDEF"
+
+# -------------------------------------------------------------------------------------------------------------------
 
 def get_valid_base(prompt_to_user):
     while True:
@@ -35,7 +36,6 @@ def get_valid_number(base):
 # -------------------------------------------------------------------------------------------------------------------
 
 def to_base_10(number_str, source_base):
-    """Converts a string number from source_base to decimal (int)."""
     total = 0
     for char in number_str:
         value = DIGITS.index(char)
@@ -45,7 +45,6 @@ def to_base_10(number_str, source_base):
 # -------------------------------------------------------------------------------------------------------------------
 
 def from_base_10(number, target_base):
-    """Converts a decimal (int) to a string in target_base."""
     if number == 0:
         return "0"
 
@@ -55,13 +54,11 @@ def from_base_10(number, target_base):
         result_chars.append(DIGITS[remainder])
         number = number // target_base
 
-    # Reverse the list to get the correct order
     return "".join(reversed(result_chars))
 
 # -------------------------------------------------------------------------------------------------------------------
 
 def ask_to_continue():
-    """Returns True if the user wants to convert another number."""
     while True:
         choice = input("\nConvert another number? (y/n): ").strip().lower()
         if choice in ['y', 'yes']:
@@ -77,18 +74,14 @@ def main():
     print("--- Base Jumper: Number Converter ---")
 
     while True:
-        # 1. Get Inputs
         current_base = get_valid_base("Enter the current base (2-16): ")
         num_str = get_valid_number(current_base)
         target_base = get_valid_base("Enter the target base (2-16): ")
 
-        # 2. Convert to Base 10 (The Hub)
         decimal_val = to_base_10(num_str, current_base)
 
-        # 3. Convert to Target Base (The Spoke)
         final_result = from_base_10(decimal_val, target_base)
 
-        # 4. Display Result
         print("-" * 40)
         print(f"Result: {final_result} (Base {target_base})")
         print("-" * 40)
